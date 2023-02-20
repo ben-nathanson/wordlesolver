@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
 from enum import Enum
 
-from typing import List
+from typing import List, Dict
+
+from wordlesolver.logic.constants import ALPHABET
 
 """
 Tiles and Letters are structurally similar but should not be conflated.
@@ -20,6 +22,7 @@ class LetterStatus(str, Enum):
 
 class TileStatus(str, Enum):
     USED = "USED"
+    MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
     UNKNOWN = "UNKNOWN"
 
@@ -40,7 +43,27 @@ class Tile:
 class Row:
     letters: List[Tile] = field(default_factory=list)
 
+    @staticmethod
+    def build_from_string(string: str):
+        row = Row()
+        for character in string:
+            row.letters.append(Tile(value=character, status=LetterStatus.UNKNOWN))
+        return row
+
+    def __repr__(self):
+        return "".join([character.value for character in self.letters])
+
 
 @dataclass
-class WordleBoard:
+class Board:
     rows: List[Row] = field(default_factory=list)
+
+
+class Keyboard:
+    keys: Dict[str, LetterStatus]
+
+    def __init__(self):
+        self.keys = {
+            char: Letter(value=char, status=LetterStatus.UNKNOWN)
+            for char in ALPHABET
+        }

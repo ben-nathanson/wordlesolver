@@ -1,5 +1,9 @@
 import unittest
 
+from wordlesolver.logic.constants import STARTER_WORDS
+from wordlesolver.logic.models import Board, Keyboard, Row
+from wordlesolver.logic.solver import solve_next_round
+
 """
 We want an internal interface that, given some state S, where S consists of:
 - The statuses (Yellow, Green, Black, Blank) of each square on the board and/or their values.
@@ -19,5 +23,9 @@ used Wordle words.
 
 
 class BasicBusinessLogic(unittest.TestCase):
-    def test_opening_word(self):
-        ...
+    def test_returns_starter_word_on_empty_board(self):
+        updated_board: Board = solve_next_round(Board(), Keyboard())
+        [first_row] = updated_board.rows
+        assert str(first_row) in STARTER_WORDS, f"{str(first_row)} is not a starter word."
+
+
