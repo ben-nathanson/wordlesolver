@@ -9,7 +9,7 @@ from wordlesolver.logic.models import Board, Keyboard, GameStatus, LetterStatus,
 class GameManager:
     board: Board
     keyboard: Keyboard
-    game_status: GameStatus
+    game_status: GameStatus = GameStatus.INDETERMINATE
     _winning_word: str
     _winning_letters: Set[str]
     _round: int = 0
