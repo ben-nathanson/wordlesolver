@@ -2,7 +2,7 @@ import unittest
 
 from wordlesolver.logic.constants import STARTER_WORDS
 from wordlesolver.logic.models import Board, Keyboard, Row
-from wordlesolver.logic.solver import solve_next_round
+from wordlesolver.logic.solver import Solver
 
 """
 We want an internal interface that, given some state S, where S consists of:
@@ -24,7 +24,8 @@ used Wordle words.
 
 class BasicBusinessLogic(unittest.TestCase):
     def test_returns_starter_word_on_empty_board(self):
-        updated_board: Board = solve_next_round(Board(), Keyboard())
+        solver = Solver()
+        updated_board: Board = solver.solve_next_round()
         [first_row] = updated_board.rows
         assert str(first_row) in STARTER_WORDS, f"{str(first_row)} is not a starter word."
 
