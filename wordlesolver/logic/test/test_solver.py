@@ -1,4 +1,5 @@
 import unittest
+from typing import List
 
 from wordlesolver.logic.constants import STARTER_WORDS
 from wordlesolver.logic.models import Board, Keyboard, Row
@@ -22,11 +23,18 @@ used Wordle words.
 """
 
 
-class BasicBusinessLogic(unittest.TestCase):
+class SolveNextRound(unittest.TestCase):
     def test_returns_starter_word_on_empty_board(self):
         solver = Solver()
         updated_board: Board = solver.solve_next_round()
         [first_row] = updated_board.rows
         assert str(first_row) in STARTER_WORDS, f"{str(first_row)} is not a starter word."
+
+
+class FindCandidates(unittest.TestCase):
+    def test_returns_starter_words_on_empty_board(self):
+        solver = Solver()
+        candidates: List[str] = solver.find_candidates()
+        assert candidates == STARTER_WORDS
 
 

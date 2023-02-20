@@ -1,5 +1,5 @@
 import random
-from typing import Set
+from typing import Set, List
 
 from wordlesolver.logic.constants import STARTER_WORDS, POSSIBLE_WORDS
 from wordlesolver.logic.models import Board, Keyboard, Row
@@ -21,4 +21,10 @@ class Solver:
             next_row = Row.build_from_string(random_starter_word)
             self.board.rows.append(next_row)
             return self.board
+
+    def find_candidates(self) -> List[str]:
+        if len(self.board.rows) < 1:
+            return STARTER_WORDS
+
+
 
