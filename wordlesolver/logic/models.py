@@ -24,7 +24,6 @@ class TileStatus(str, Enum):
     USED = "USED"
     MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
-    UNKNOWN = "UNKNOWN"
 
 
 @dataclass
@@ -35,23 +34,23 @@ class Letter:
 
 @dataclass
 class Tile:
-    status: LetterStatus
     value: str
+    status: TileStatus
 
 
 @dataclass
 class Row:
-    letters: List[Tile] = field(default_factory=list)
+    tiles: List[Tile] = field(default_factory=list)
 
     @staticmethod
     def build_from_string(string: str):
         row = Row()
         for character in string:
-            row.letters.append(Tile(value=character, status=LetterStatus.UNKNOWN))
+            row.tiles.append(Tile(value=character, status=LetterStatus.UNKNOWN))
         return row
 
     def __repr__(self):
-        return "".join([character.value for character in self.letters])
+        return "".join([character.value for character in self.tiles])
 
 
 @dataclass
@@ -67,3 +66,22 @@ class Keyboard:
             char: Letter(value=char, status=LetterStatus.UNKNOWN)
             for char in ALPHABET
         }
+
+    @staticmethod
+    def _validate_letter(character: str):
+        if not len(character) == 1 and character in ALPHABET:
+            raise ValueError(f"{character} is not valid.")
+
+    def get_status(self, character: str) -> LetterStatus:
+        self._validate_letter(character)
+        return self.keys[character]
+
+    def set_status(self, character: str, status: LetterStatus):
+        self._validate_letter(character)
+        self.keys[character] = status
+
+
+class GameStatus(str, Enum):
+    WIN = "WIN"
+    LOSS = "LOSS"
+    INDETERMINATE = "INDETERMINATE"

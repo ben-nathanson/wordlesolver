@@ -1,4 +1,5 @@
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+MAX_ROUNDS = 5
 STARTER_WORDS = ["crane", "plane", "pound", "squid"]
 # TODO Wordle excludes many of these words.
 POSSIBLE_WORDS = {
