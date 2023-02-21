@@ -19,7 +19,7 @@ class GameManager:
     def __init__(self):
         self.board = Board()
         self.keyboard = Keyboard()
-        self._winning_word = "crane"#random.choice(list(POSSIBLE_WORDS))
+        self._winning_word = random.choice(list(POSSIBLE_WORDS))
         self._letters_in_word = set(self._winning_word)
         self._last_index_of_letter = {
             letter: self._winning_word.rindex(letter)
