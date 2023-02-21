@@ -16,6 +16,7 @@ different statuses.
 
 class LetterStatus(str, Enum):
     USED = "USED"
+    MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
     UNKNOWN = "UNKNOWN"
 
@@ -24,6 +25,7 @@ class TileStatus(str, Enum):
     USED = "USED"
     MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
+    UNKNOWN = "UNKNOWN"
 
 
 @dataclass
@@ -46,7 +48,7 @@ class Row:
     def build_from_string(string: str):
         row = Row()
         for character in string:
-            row.tiles.append(Tile(value=character, status=LetterStatus.UNKNOWN))
+            row.tiles.append(Tile(value=character, status=TileStatus.UNKNOWN))
         return row
 
     def __repr__(self):
@@ -62,7 +64,7 @@ class Keyboard:
     keys: Dict[str, LetterStatus]
 
     def __init__(self):
-        self.keys = {
+        self.keys: Dict[str, LetterStatus] = {
             char: Letter(value=char, status=LetterStatus.UNKNOWN)
             for char in ALPHABET
         }
