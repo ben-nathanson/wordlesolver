@@ -10,7 +10,7 @@ class GameManager:
     board: Board
     keyboard: Keyboard
     game_status: GameStatus = GameStatus.INDETERMINATE
-    _winning_word: str
+    winning_word: str
     _letters_in_word: Set[str]
     _last_index_of_letter: Dict[str, int]
 
@@ -19,10 +19,10 @@ class GameManager:
     def __init__(self):
         self.board = Board()
         self.keyboard = Keyboard()
-        self._winning_word = random.choice(list(POSSIBLE_WORDS))
-        self._letters_in_word = set(self._winning_word)
+        self.winning_word = random.choice(list(POSSIBLE_WORDS))
+        self._letters_in_word = set(self.winning_word)
         self._last_index_of_letter = {
-            letter: self._winning_word.rindex(letter)
+            letter: self.winning_word.rindex(letter)
             for letter in self._letters_in_word
         }
 
@@ -34,7 +34,7 @@ class GameManager:
         row: Row = Row()
         for index, letter in enumerate(word):
             tile: Tile = Tile(letter, TileStatus.UNUSED)
-            if letter == self._winning_word[index]:
+            if letter == self.winning_word[index]:
                 tile.status = TileStatus.USED
             elif letter in self._letters_in_word:
                 tile.status = TileStatus.MISPLACED
@@ -45,7 +45,7 @@ class GameManager:
         for index, letter in enumerate(word):
             if letter not in self._letters_in_word:
                 self.keyboard.set_status(letter, LetterStatus.UNUSED)
-            elif self._winning_word[index] == letter:
+            elif self.winning_word[index] == letter:
                 self.keyboard.set_status(letter, LetterStatus.USED)
             elif letter in self._letters_in_word:
                 if self.keyboard.get_status(letter) == LetterStatus.USED:
@@ -69,7 +69,7 @@ class GameManager:
         self._validate_word(word)
         self._update(word)
 
-        if word == self._winning_word:
+        if word == self.winning_word:
             self.game_status = GameStatus.WIN
         elif self._round == MAX_ROUNDS:
             self.game_status = GameStatus.LOSS

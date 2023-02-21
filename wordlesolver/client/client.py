@@ -75,7 +75,7 @@ class CliClient:
         if game_manager.game_status == GameStatus.WIN:
             print("Congratulations, you won!")
         else:
-            print("Sorry, you lost.")
+            print(f"Sorry, you lost. The winning word was {game_manager.winning_word}.")
 
         choice = input("Play again? y/n")
 
