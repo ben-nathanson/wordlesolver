@@ -30,6 +30,8 @@ class CliClient:
     def _render_keyboard(keyboard: Keyboard) -> str:
         rendered_keyboard = ""
         for index in range(3):
+            left_padding = " " * (index + 1)
+            rendered_keyboard += left_padding
             row = QWERTY_LAYOUT[index]
             for key in row:
                 key_status: LetterStatus = keyboard.keys[key]
@@ -43,7 +45,6 @@ class CliClient:
                 rendered_key += key
                 rendered_keyboard += f"{AnsiEscapeSequence.WHITE_TEXT.value}|{rendered_key}"
             rendered_keyboard += f"{AnsiEscapeSequence.WHITE_TEXT.value}|\n"
-            rendered_keyboard += " " * (index + 1)
         return rendered_keyboard
 
     def _render_board(self, board: Board) -> str:
