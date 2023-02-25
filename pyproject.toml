@@ -2,12 +2,14 @@
 name = "wordlesolver"
 version = "0.1.0"
 description = ""
-authors = ["Ben Nathanson <ben@nathanson.dev>"]
+authors = ["Ben Nathanson <24640705+ben-nathanson@users.noreply.github.com"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
 pydantic = "^1.10.5"
+black = "^23.1.0"
+pytest = "^7.2.1"
 
 
 [build-system]
