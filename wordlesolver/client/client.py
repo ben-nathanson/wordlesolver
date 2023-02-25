@@ -60,7 +60,7 @@ class CliClient:
                     )
                 rendered_row += f"{AnsiEscapeSequence.WHITE_TEXT.value}|"
             else:
-                rendered_row += "| | | | |"
+                rendered_row += "| | | | | |"
             rendered_row += "\n"
             rendered_board += rendered_row
         rendered_board += "\n____________\n"
