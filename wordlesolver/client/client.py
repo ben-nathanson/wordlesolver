@@ -78,6 +78,8 @@ class CliClient:
         else:
             print(f"Sorry, you lost. The winning word was {game_manager.winning_word}.")
 
+        print(self._render(game_manager.board, game_manager.keyboard))
+
         choice = input("Play again? y/n")
 
         if choice.lower() in {"y", "yes"}:
