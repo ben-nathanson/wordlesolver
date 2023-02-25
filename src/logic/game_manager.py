@@ -1,8 +1,8 @@
 import random
 from typing import Set, Dict
 
-from wordlesolver.logic.constants import POSSIBLE_WORDS, MAX_ROUNDS, MAX_LETTERS
-from wordlesolver.logic.models import Board, Keyboard, GameStatus, LetterStatus, Row, \
+from src.logic.constants import POSSIBLE_WORDS, MAX_ROUNDS, MAX_LETTERS
+from src.logic.models import Board, Keyboard, GameStatus, LetterStatus, Row, \
     Tile, TileStatus
 
 

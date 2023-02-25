@@ -1,8 +1,8 @@
 import random
 from typing import Set, List
 
-from wordlesolver.logic.constants import STARTER_WORDS, POSSIBLE_WORDS
-from wordlesolver.logic.models import Board, Keyboard, Row
+from src.logic.constants import STARTER_WORDS, POSSIBLE_WORDS
+from src.logic.models import Board, Keyboard, Row
 
 
 class Solver:

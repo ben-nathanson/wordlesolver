@@ -1,4 +1,4 @@
-from wordlesolver.client.client import CliClient
+from src.client.client import CliClient
 
 
 def main():

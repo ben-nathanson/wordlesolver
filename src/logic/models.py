@@ -3,7 +3,7 @@ from enum import Enum
 
 from typing import List, Dict
 
-from wordlesolver.logic.constants import ALPHABET
+from src.logic.constants import ALPHABET
 
 """
 Tiles and Letters are structurally similar but should not be conflated.

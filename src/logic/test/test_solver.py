@@ -1,9 +1,9 @@
 import unittest
 from typing import List
 
-from wordlesolver.logic.constants import STARTER_WORDS
-from wordlesolver.logic.models import Board, Keyboard, Row
-from wordlesolver.logic.solver import Solver
+from src.logic.constants import STARTER_WORDS
+from src.logic.models import Board, Keyboard, Row
+from src.logic.solver import Solver
 
 """
 We want an internal interface that, given some state S, where S consists of:

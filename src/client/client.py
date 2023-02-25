@@ -1,8 +1,8 @@
-from wordlesolver.client.style import AnsiEscapeSequence, QWERTY_LAYOUT
-from wordlesolver.logic.game_manager import GameManager
-from wordlesolver.logic.models import GameStatus, Board, Keyboard, LetterStatus, \
+from src.client.style import AnsiEscapeSequence, QWERTY_LAYOUT
+from src.logic.game_manager import GameManager
+from src.logic.models import GameStatus, Board, Keyboard, LetterStatus, \
     TileStatus
-from wordlesolver.view.models import ViewBoard, ViewTile
+from src.view.models import ViewBoard, ViewTile
 
 
 class CliClient:
