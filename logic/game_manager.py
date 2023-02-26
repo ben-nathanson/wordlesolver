@@ -1,8 +1,8 @@
 import random
 from typing import Set, Dict
 
-from src.logic.constants import POSSIBLE_WORDS, MAX_ROUNDS, MAX_LETTERS
-from src.logic.models import Board, Keyboard, GameStatus, LetterStatus, Row, \
+from logic.constants import POSSIBLE_WORDS, MAX_ROUNDS, MAX_LETTERS
+from logic.models import Board, Keyboard, GameStatus, LetterStatus, Row, \
     Tile, TileStatus
 
 

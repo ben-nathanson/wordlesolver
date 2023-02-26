@@ -1,4 +1,4 @@
-from src.client.client import CliClient
+from client.cli_client import CliClient
 
 
 def main():

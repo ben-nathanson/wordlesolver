@@ -1,8 +1,8 @@
-from src.client.style import AnsiEscapeSequence, QWERTY_LAYOUT
-from src.logic.game_manager import GameManager
-from src.logic.models import GameStatus, Board, Keyboard, LetterStatus, \
+from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
+from logic.game_manager import GameManager
+from logic.models import GameStatus, Board, Keyboard, LetterStatus, \
     TileStatus
-from src.view.models import ViewBoard, ViewTile
+from view.models import ViewBoard, ViewTile
 
 
 class CliClient:

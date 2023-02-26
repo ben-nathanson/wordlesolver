@@ -3,7 +3,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from src.logic.models import Board
+from logic.models import Board
 
 
 class ViewLetterStatus(str, Enum):
