@@ -2,11 +2,11 @@ from enum import Enum
 
 
 class AnsiEscapeSequence(str, Enum):
-    GREEN_TEXT = "\u001b[32m"
+    GREEN_TEXT = "\u001b[32;1m"
     BLACK_TEXT = "\u001b[30m"
-    RESET = "\033[0m"
-    WHITE_TEXT = "\033[37m"
-    YELLOW_TEXT = "\u001b[33m"
+    RESET = "\u001b[0m"
+    WHITE_TEXT = "\u001b[37;1m"
+    YELLOW_TEXT = "\u001b[33;1m"
 
 
 QWERTY_LAYOUT = [
