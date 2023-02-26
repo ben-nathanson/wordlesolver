@@ -1,7 +1,6 @@
 from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
 from logic.game_manager import GameManager
-from logic.models import GameStatus, Board, Keyboard, LetterStatus, \
-    TileStatus
+from logic.models import GameStatus, Board, Keyboard, LetterStatus, TileStatus
 from view.models import ViewBoard, ViewTile
 
 
@@ -47,7 +46,9 @@ class CliClient:
                 else:
                     rendered_key += AnsiEscapeSequence.BRIGHT_WHITE_TEXT.value
                 rendered_key += key
-                rendered_keyboard += f"{AnsiEscapeSequence.WHITE_TEXT.value}|{rendered_key}"
+                rendered_keyboard += (
+                    f"{AnsiEscapeSequence.WHITE_TEXT.value}|{rendered_key}"
+                )
             rendered_keyboard += f"{AnsiEscapeSequence.WHITE_TEXT.value}|\n"
         return rendered_keyboard
 

@@ -25,6 +25,3 @@ class Solver:
     def find_candidates(self) -> List[str]:
         if len(self.board.rows) < 1:
             return STARTER_WORDS
-
-
-

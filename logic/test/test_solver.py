@@ -28,7 +28,9 @@ class SolveNextRound(unittest.TestCase):
         solver = Solver()
         updated_board: Board = solver.solve_next_round()
         [first_row] = updated_board.rows
-        assert str(first_row) in STARTER_WORDS, f"{str(first_row)} is not a starter word."
+        assert (
+            str(first_row) in STARTER_WORDS
+        ), f"{str(first_row)} is not a starter word."
 
 
 class FindCandidates(unittest.TestCase):
@@ -36,5 +38,3 @@ class FindCandidates(unittest.TestCase):
         solver = Solver()
         candidates: List[str] = solver.find_candidates()
         assert candidates == STARTER_WORDS
-
-

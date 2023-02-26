@@ -16,7 +16,7 @@ class ViewTileStatus(str, Enum):
     USED = "USED"
     MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
-    
+
 
 class ViewTile(BaseModel):
     value: str
@@ -36,7 +36,9 @@ class ViewBoard(BaseModel):
         for row in board.rows:
             view_row = ViewRow()
             for tile in row.tiles:
-                view_tile = ViewTile(value=tile.value, status=ViewTileStatus(tile.status))
+                view_tile = ViewTile(
+                    value=tile.value, status=ViewTileStatus(tile.status)
+                )
                 view_row.tiles.append(view_tile)
             view_rows.append(view_row)
         return ViewBoard(rows=view_rows)

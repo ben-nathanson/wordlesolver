@@ -65,8 +65,7 @@ class Keyboard:
 
     def __init__(self):
         self.keys: Dict[str, LetterStatus] = {
-            char: Letter(value=char, status=LetterStatus.UNKNOWN)
-            for char in ALPHABET
+            char: Letter(value=char, status=LetterStatus.UNKNOWN) for char in ALPHABET
         }
 
     @staticmethod

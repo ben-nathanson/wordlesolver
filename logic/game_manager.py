@@ -2,8 +2,15 @@ import random
 from typing import Set, Dict
 
 from logic.constants import POSSIBLE_WORDS, MAX_ROUNDS, MAX_LETTERS
-from logic.models import Board, Keyboard, GameStatus, LetterStatus, Row, \
-    Tile, TileStatus
+from logic.models import (
+    Board,
+    Keyboard,
+    GameStatus,
+    LetterStatus,
+    Row,
+    Tile,
+    TileStatus,
+)
 
 
 class GameManager:
@@ -22,8 +29,7 @@ class GameManager:
         self.winning_word = random.choice(list(POSSIBLE_WORDS))
         self._letters_in_word = set(self.winning_word)
         self._last_index_of_letter = {
-            letter: self.winning_word.rindex(letter)
-            for letter in self._letters_in_word
+            letter: self.winning_word.rindex(letter) for letter in self._letters_in_word
         }
 
     def _update(self, word: str):
@@ -62,7 +68,10 @@ class GameManager:
             raise ValueError("This is not a recognized word.")
 
     def play(self, word: str) -> GameStatus:
-        if self._round >= MAX_ROUNDS or self.game_status in {GameStatus.LOSS, GameStatus.WIN}:
+        if self._round >= MAX_ROUNDS or self.game_status in {
+            GameStatus.LOSS,
+            GameStatus.WIN,
+        }:
             raise RuntimeError("Game already completed.")
 
         self._round += 1
