@@ -1,6 +1,7 @@
 from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
 from logic.game_manager import GameManager
 from logic.models import GameStatus, Board, Keyboard, LetterStatus, TileStatus
+from logic.solver import Solver
 from view.models import ViewBoard, ViewTile
 
 
@@ -74,8 +75,13 @@ class CliClient:
 
     def play(self):
         game_manager = GameManager()
+        solver = Solver()
         while game_manager.game_status == GameStatus.INDETERMINATE:
             print(self._render(game_manager.board, game_manager.keyboard))
+            solver.update_possible_words(game_manager.board)
+            possible_words = solver.find_possible_words(game_manager.board)
+            suggestion = "\n".join(possible_words[:5])
+            print(f"The solver suggests \n{suggestion}")
             game_manager.play(input("Enter your next choice:\n").strip().lower()[:5])
 
         if game_manager.game_status == GameStatus.WIN:
