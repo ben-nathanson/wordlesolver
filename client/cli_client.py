@@ -23,6 +23,8 @@ class CliClient:
             rendered_tile += AnsiEscapeSequence.YELLOW_TEXT.value
         elif tile.status == TileStatus.UNUSED:
             rendered_tile += AnsiEscapeSequence.BLACK_TEXT.value
+        else:
+            rendered_tile += AnsiEscapeSequence.BRIGHT_WHITE_TEXT.value
         rendered_tile += tile.value
         return rendered_tile
 
@@ -42,6 +44,8 @@ class CliClient:
                     rendered_key = AnsiEscapeSequence.BLACK_TEXT.value
                 elif key_status == LetterStatus.MISPLACED:
                     rendered_key = AnsiEscapeSequence.YELLOW_TEXT.value
+                else:
+                    rendered_key += AnsiEscapeSequence.BRIGHT_WHITE_TEXT.value
                 rendered_key += key
                 rendered_keyboard += f"{AnsiEscapeSequence.WHITE_TEXT.value}|{rendered_key}"
             rendered_keyboard += f"{AnsiEscapeSequence.WHITE_TEXT.value}|\n"
