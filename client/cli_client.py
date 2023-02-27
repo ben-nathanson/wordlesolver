@@ -1,6 +1,7 @@
 import random
 
 from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
+from logic.constants import POSSIBLE_WORDS
 from logic.game_manager import GameManager
 from logic.models import GameStatus, Board, Keyboard, LetterStatus, TileStatus
 from logic.solver import Solver
@@ -85,7 +86,16 @@ class CliClient:
             random.shuffle(possible_words)
             suggestion = "\n".join(possible_words[:10])
             print(f"The solver suggests \n{suggestion}")
-            game_manager.play(input("Enter your next choice:\n").strip().lower()[:5])
+            while True:
+                next_choice = input("Enter your next choice:\n").strip().lower()
+                if len(next_choice) != 5:
+                    print("Your choice must be exactly five characters long.")
+                elif next_choice not in POSSIBLE_WORDS:
+                    print(f"{next_choice} is not a valid Wordle word.")
+                else:
+                    break
+
+            game_manager.play(next_choice)
 
         if game_manager.game_status == GameStatus.WIN:
             print("Congratulations, you won!")
