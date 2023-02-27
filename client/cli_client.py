@@ -1,3 +1,5 @@
+import random
+
 from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
 from logic.game_manager import GameManager
 from logic.models import GameStatus, Board, Keyboard, LetterStatus, TileStatus
@@ -80,7 +82,8 @@ class CliClient:
             print(self._render(game_manager.board, game_manager.keyboard))
             solver.update_possible_words(game_manager.board)
             possible_words = solver.find_possible_words(game_manager.board)
-            suggestion = "\n".join(possible_words[:5])
+            random.shuffle(possible_words)
+            suggestion = "\n".join(possible_words[:10])
             print(f"The solver suggests \n{suggestion}")
             game_manager.play(input("Enter your next choice:\n").strip().lower()[:5])
 

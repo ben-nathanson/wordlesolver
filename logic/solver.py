@@ -36,7 +36,10 @@ class Solver:
                 letter = word[index]
                 required_letter: str | None = self.required_letter_positions.get(index)
                 if required_letter and not letter == required_letter:
-                    if word in self.possible_words:
+                    is_misplaced_letter = (
+                        index in self.misplaced_letter_positions[letter]
+                    )
+                    if word in self.possible_words and not is_misplaced_letter:
                         self.possible_words.remove(word)
                     continue
                 elif index in self.misplaced_letter_positions[letter]:
