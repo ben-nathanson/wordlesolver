@@ -1,5 +1,3 @@
-import random
-
 from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
 from logic.constants import POSSIBLE_WORDS
 from logic.game_manager import GameManager
@@ -58,7 +56,7 @@ class CliClient:
 
     def _render_board(self, board: Board) -> str:
         view_board: ViewBoard = ViewBoard.from_board(board)
-        rendered_board = "____________\n"
+        rendered_board = "___________\n"
         for row_index in range(5):
             rendered_row = ""
             if row_index < len(view_board.rows):
@@ -73,7 +71,7 @@ class CliClient:
                 rendered_row += "| | | | | |"
             rendered_row += "\n"
             rendered_board += rendered_row
-        rendered_board += "\n____________\n"
+        rendered_board += "___________\n"
         return rendered_board
 
     def play(self):
@@ -81,10 +79,8 @@ class CliClient:
         solver = Solver()
         while game_manager.game_status == GameStatus.INDETERMINATE:
             print(self._render(game_manager.board, game_manager.keyboard))
-            solver.update_possible_words(game_manager.board)
             possible_words = solver.find_possible_words(game_manager.board)
-            random.shuffle(possible_words)
-            suggestion = "\n".join(possible_words[:10])
+            suggestion = "\n".join(sorted(possible_words))
             print(f"The solver suggests \n{suggestion}")
             while True:
                 next_choice = input("Enter your next choice:\n").strip().lower()
@@ -94,7 +90,6 @@ class CliClient:
                     print(f"{next_choice} is not a valid Wordle word.")
                 else:
                     break
-
             game_manager.play(next_choice)
 
         if game_manager.game_status == GameStatus.WIN:
@@ -104,7 +99,7 @@ class CliClient:
 
         print(self._render(game_manager.board, game_manager.keyboard))
 
-        choice = input("Play again? y/n")
+        choice = input("Play again? y/n\n")
 
         if choice.lower() in {"y", "yes"}:
             self.play()
