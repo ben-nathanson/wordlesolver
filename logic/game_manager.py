@@ -43,7 +43,10 @@ class GameManager:
             if letter == self.winning_word[index]:
                 tile.status = TileStatus.USED
             elif letter in self._letters_in_word:
-                tile.status = TileStatus.MISPLACED
+                if word.count(letter) <= self.winning_word.count(letter):
+                    tile.status = TileStatus.MISPLACED
+                else:
+                    tile.status = TileStatus.UNUSED
             row.tiles.append(tile)
         self.board.rows.append(row)
 
