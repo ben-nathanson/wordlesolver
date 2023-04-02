@@ -76,9 +76,9 @@ class CliClient:
         rendered_board += "___________\n"
         return rendered_board
 
-    def play(self, print_suggestions: bool):
-        game_manager = GameManager()
-        solver = Solver()
+    def play(self, print_suggestions: bool, hard_mode: bool):
+        game_manager = GameManager(hard_mode)
+        solver = Solver(hard_mode)
         while game_manager.game_status == GameStatus.INDETERMINATE:
             print(self._render(game_manager.board, game_manager.keyboard))
             if print_suggestions:

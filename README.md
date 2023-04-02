@@ -1,9 +1,18 @@
 # Wordlesolver
 
+A CLI based Wordle game, with bells and whistles.
+
+
+## Prerequisites
+- Python 3.11
+- Poetry
+
+## Usage
 ```
-A CLI based Wordle game, with optional hints.
+Usage: main.py [OPTIONS]
 
 Options:
-  --hints BOOLEAN  Print possible answers.
-  --help           Show this message and exit.
+  --hints BOOLEAN      Print possible answers.
+  --hard-mode BOOLEAN  Use more obscure English words.
+  --help               Show this message and exit.
 ```

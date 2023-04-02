@@ -1,16 +1,23 @@
 from typing import Set, List
 
-from logic.constants import VALID_WORDLE_WORDS, ALPHABET, MAX_LETTERS
+from logic.constants import (
+    VALID_WORDLE_WORDS,
+    ALPHABET,
+    MAX_LETTERS,
+    COMMON_ENGLISH_WORDS,
+)
 from logic.models import Board, Keyboard, TileStatus
 
 
 class Solver:
     possible_words: Set[str]
 
-    def __init__(self):
+    def __init__(self, hard_mode: bool):
         self.board = Board()
         self.keyboard = Keyboard()
-        self.possible_words = VALID_WORDLE_WORDS.copy()
+        self.possible_words = (
+            VALID_WORDLE_WORDS.copy() if hard_mode else COMMON_ENGLISH_WORDS.copy()
+        )
         self.unused_letters = set()
         self.used_letters = set()
         self.required_letter_positions: dict[int, str] = {}

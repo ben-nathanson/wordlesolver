@@ -1,7 +1,12 @@
 import random
 from typing import Set, Dict
 
-from logic.constants import VALID_WORDLE_WORDS, MAX_ROUNDS, MAX_LETTERS
+from logic.constants import (
+    VALID_WORDLE_WORDS,
+    MAX_ROUNDS,
+    MAX_LETTERS,
+    COMMON_ENGLISH_WORDS,
+)
 from logic.models import (
     Board,
     Keyboard,
@@ -23,10 +28,11 @@ class GameManager:
 
     _round: int = 0
 
-    def __init__(self):
+    def __init__(self, hard_mode: bool):
+        self.word_list = VALID_WORDLE_WORDS if hard_mode else COMMON_ENGLISH_WORDS
         self.board = Board()
         self.keyboard = Keyboard()
-        self.winning_word = random.choice(list(VALID_WORDLE_WORDS))
+        self.winning_word = random.choice(list(self.word_list))
         self._letters_in_word = set(self.winning_word)
         self._last_index_of_letter = {
             letter: self.winning_word.rindex(letter) for letter in self._letters_in_word
