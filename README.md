@@ -8,6 +8,13 @@ A CLI based Wordle game, with bells and whistles.
 - Poetry
 
 ## Usage
+To run:
+
+```
+poetry run python main.py [OPTIONS]
+```
+
+
 ```
 Usage: main.py [OPTIONS]
 
