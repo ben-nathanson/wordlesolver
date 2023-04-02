@@ -1,9 +1,9 @@
 # Wordlesolver
 
-An automatic Wordle-solving script.
+```
+A CLI based Wordle game, with optional hints.
 
-## Design Plan
-
-1. Build core logic
-2. Add command line interface client
-3. Add web server
+Options:
+  --hints BOOLEAN  Print possible answers.
+  --help           Show this message and exit.
+```

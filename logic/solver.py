@@ -1,6 +1,6 @@
 from typing import Set, List
 
-from logic.constants import STARTER_WORDS, POSSIBLE_WORDS, ALPHABET
+from logic.constants import VALID_WORDLE_WORDS, ALPHABET, MAX_LETTERS
 from logic.models import Board, Keyboard, TileStatus
 
 
@@ -10,15 +10,19 @@ class Solver:
     def __init__(self):
         self.board = Board()
         self.keyboard = Keyboard()
-        self.possible_words = POSSIBLE_WORDS.copy()
+        self.possible_words = VALID_WORDLE_WORDS.copy()
         self.unused_letters = set()
         self.used_letters = set()
         self.required_letter_positions: dict[int, str] = {}
         self.misplaced_letter_positions: dict[str, set[int]] = {
             letter: set() for letter in ALPHABET
         }
+        self.misplaced_letter_positions_reverse_mapping = {
+            index: set() for index in range(MAX_LETTERS)
+        }
+        self.misplaced_letters = set()
 
-    def update_possible_words(self, board: Board):
+    def _update_possible_words(self, board: Board):
         for row in board.rows:
             for index, tile in enumerate(row.tiles):
                 letter = tile.value
@@ -30,9 +34,10 @@ class Solver:
                 elif tile.status == TileStatus.MISPLACED:
                     self.used_letters.add(letter)
                     self.misplaced_letter_positions[letter].add(index)
+                    self.misplaced_letter_positions_reverse_mapping[index].add(letter)
         words = self.possible_words.copy()
         for word in words:
-            for index in range(5):
+            for index in range(MAX_LETTERS):
                 letter = word[index]
                 required_letter: str | None = self.required_letter_positions.get(index)
                 if required_letter and not letter == required_letter:
@@ -55,8 +60,9 @@ class Solver:
                     if word in self.possible_words:
                         self.possible_words.remove(word)
 
-    def find_possible_words(self, board: Board) -> List[str]:
-        if len(board.rows) < 1:
-            return STARTER_WORDS
-        else:
-            return list(self.possible_words)
+    def find_possible_words(self, board: Board) -> [str]:
+        """
+        Finds and returns all possible Wordle words given the state of the board.
+        """
+        self._update_possible_words(board)
+        return list(self.possible_words)

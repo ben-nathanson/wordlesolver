@@ -9,8 +9,8 @@ from logic.constants import ALPHABET
 Tiles and Letters are structurally similar but should not be conflated.
 
 For example, SPOON has two O's. If I guess BOOTH, the first O will be yellow, the
-second will be green. The letter O has a status of "USED", but the tiles will have 
-different statuses. 
+second will be green. The letter O has a status of "USED", but the tiles will have
+different statuses.
 """
 
 
@@ -26,6 +26,7 @@ class TileStatus(str, Enum):
     MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
     UNKNOWN = "UNKNOWN"
+    ALREADY_USED = "ALREADY_USED"
 
 
 @dataclass

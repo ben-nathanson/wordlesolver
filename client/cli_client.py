@@ -1,5 +1,7 @@
+import random
+
 from client.style import AnsiEscapeSequence, QWERTY_LAYOUT
-from logic.constants import POSSIBLE_WORDS
+from logic.constants import VALID_WORDLE_WORDS, MAX_ROUNDS
 from logic.game_manager import GameManager
 from logic.models import GameStatus, Board, Keyboard, LetterStatus, TileStatus
 from logic.solver import Solver
@@ -22,7 +24,7 @@ class CliClient:
             rendered_tile += AnsiEscapeSequence.GREEN_TEXT.value
         elif tile.status == TileStatus.MISPLACED:
             rendered_tile += AnsiEscapeSequence.YELLOW_TEXT.value
-        elif tile.status == TileStatus.UNUSED:
+        elif tile.status == TileStatus.UNUSED or tile.status == TileStatus.ALREADY_USED:
             rendered_tile += AnsiEscapeSequence.BLACK_TEXT.value
         else:
             rendered_tile += AnsiEscapeSequence.BRIGHT_WHITE_TEXT.value
@@ -57,7 +59,7 @@ class CliClient:
     def _render_board(self, board: Board) -> str:
         view_board: ViewBoard = ViewBoard.from_board(board)
         rendered_board = "___________\n"
-        for row_index in range(5):
+        for row_index in range(MAX_ROUNDS):
             rendered_row = ""
             if row_index < len(view_board.rows):
                 row = view_board.rows[row_index]
@@ -74,19 +76,25 @@ class CliClient:
         rendered_board += "___________\n"
         return rendered_board
 
-    def play(self):
+    def play(self, print_suggestions: bool):
         game_manager = GameManager()
         solver = Solver()
         while game_manager.game_status == GameStatus.INDETERMINATE:
             print(self._render(game_manager.board, game_manager.keyboard))
-            possible_words = solver.find_possible_words(game_manager.board)
-            suggestion = "\n".join(sorted(possible_words))
-            print(f"The solver suggests \n{suggestion}")
+            if print_suggestions:
+                all_possible_words = list(
+                    solver.find_possible_words(game_manager.board)
+                )
+                possible_words = list(
+                    {random.choice(all_possible_words) for _ in range(10)}
+                )
+                suggestion = "\n".join(sorted(possible_words))
+                print(f"The solver suggests as possible words:\n{suggestion}\n")
             while True:
                 next_choice = input("Enter your next choice:\n").strip().lower()
                 if len(next_choice) != 5:
                     print("Your choice must be exactly five characters long.")
-                elif next_choice not in POSSIBLE_WORDS:
+                elif next_choice not in VALID_WORDLE_WORDS:
                     print(f"{next_choice} is not a valid Wordle word.")
                 else:
                     break
@@ -102,4 +110,4 @@ class CliClient:
         choice = input("Play again? y/n\n")
 
         if choice.lower() in {"y", "yes"}:
-            self.play()
+            self.play(print_suggestions)

@@ -16,6 +16,7 @@ class ViewTileStatus(str, Enum):
     USED = "USED"
     MISPLACED = "MISPLACED"
     UNUSED = "UNUSED"
+    ALREADY_USED = "ALREADY_USED"
 
 
 class ViewTile(BaseModel):

@@ -1,9 +1,9 @@
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 MAX_ROUNDS = 6
 MAX_LETTERS = 5
-STARTER_WORDS = ["crane", "plane", "pound", "squid"]
+STARTER_WORDS = ["salet"]
 # TODO Wordle excludes many of these words.
-POSSIBLE_WORDS = {
+VALID_WORDLE_WORDS = {
     "aahed",
     "aalii",
     "aapas",
@@ -21,6 +21,8 @@ POSSIBLE_WORDS = {
     "abase",
     "abash",
     "abask",
+    # }
+    # _ = {
     "abate",
     "abaya",
     "abbas",

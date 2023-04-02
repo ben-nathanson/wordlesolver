@@ -1,7 +1,7 @@
 import random
 from typing import Set, Dict
 
-from logic.constants import POSSIBLE_WORDS, MAX_ROUNDS, MAX_LETTERS
+from logic.constants import VALID_WORDLE_WORDS, MAX_ROUNDS, MAX_LETTERS
 from logic.models import (
     Board,
     Keyboard,
@@ -26,7 +26,7 @@ class GameManager:
     def __init__(self):
         self.board = Board()
         self.keyboard = Keyboard()
-        self.winning_word = random.choice(list(POSSIBLE_WORDS))
+        self.winning_word = random.choice(list(VALID_WORDLE_WORDS))
         self._letters_in_word = set(self.winning_word)
         self._last_index_of_letter = {
             letter: self.winning_word.rindex(letter) for letter in self._letters_in_word
@@ -46,7 +46,7 @@ class GameManager:
                 if word.count(letter) <= self.winning_word.count(letter):
                     tile.status = TileStatus.MISPLACED
                 else:
-                    tile.status = TileStatus.UNUSED
+                    tile.status = TileStatus.ALREADY_USED
             row.tiles.append(tile)
         self.board.rows.append(row)
 
@@ -67,7 +67,7 @@ class GameManager:
         if len(word) > MAX_LETTERS:
             raise ValueError("This word is too long.")
 
-        if word not in POSSIBLE_WORDS:
+        if word not in VALID_WORDLE_WORDS:
             raise ValueError("This is not a recognized word.")
 
     def play(self, word: str) -> GameStatus:
