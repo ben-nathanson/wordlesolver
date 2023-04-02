@@ -21,8 +21,6 @@ VALID_WORDLE_WORDS = {
     "abase",
     "abash",
     "abask",
-    # }
-    # _ = {
     "abate",
     "abaya",
     "abbas",
