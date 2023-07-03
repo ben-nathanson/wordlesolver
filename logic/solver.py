@@ -1,5 +1,3 @@
-from typing import Set, List
-
 from logic.constants import (
     VALID_WORDLE_WORDS,
     ALPHABET,
@@ -10,7 +8,7 @@ from logic.models import Board, Keyboard, TileStatus
 
 
 class Solver:
-    possible_words: Set[str]
+    possible_words: {str}
 
     def __init__(self, hard_mode: bool):
         self.board = Board()
