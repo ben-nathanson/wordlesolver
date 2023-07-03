@@ -110,4 +110,4 @@ class CliClient:
         choice = input("Play again? y/n\n")
 
         if choice.lower() in {"y", "yes"}:
-            self.play(print_suggestions)
+            self.play(print_suggestions, hard_mode)
