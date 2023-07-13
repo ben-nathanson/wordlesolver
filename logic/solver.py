@@ -29,6 +29,9 @@ class Solver:
 
     def _update_possible_words(self, board: Board):
         for row in board.rows:
+            already_played_word: str = "".join([tile.value for tile in row.tiles])
+            if already_played_word in self.possible_words:
+                self.possible_words.remove(already_played_word)
             for index, tile in enumerate(row.tiles):
                 letter = tile.value
                 if tile.status == TileStatus.UNUSED:
